@@ -1,0 +1,91 @@
+DIAGONAL SUM
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += mat[i][i];           // Primary diagonal
+            sum += mat[i][n - 1 - i];   // Secondary diagonal
+        }
+
+        // Center element ko ek baar subtract karo
+        if (n % 2 == 1) {
+            sum -= mat[n / 2][n / 2];
+        }
+
+        return sum;
+    }
+};
+RESHAPE MATRIX
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {
+        int m = mat.size();
+        int n = mat[0].size();
+
+        // Check if reshape is possible
+        if (m * n != r * c) {
+            return mat;
+        }
+
+        vector<vector<int>> result(r, vector<int>(c));
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int index = i * n + j;
+
+                result[index / c][index % c] = mat[i][j];
+            }
+        }
+
+        return result;
+    }
+};
+SPIRAL MATRIX
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+    int m = mat.size(), n = mat[0].size();
+        vector<int> spiralOrder(vector<)
+        int srow = 0, scol = 0;
+        int erow = m - 1, ecol = n - 1;
+        
+        vector<int> ans;
+
+        while (srow <= erow && scol <= ecol) {
+            
+            // Top row
+            for (int j = scol; j <= ecol; j++) {
+                ans.push_back(mat[srow][j]);
+            }
+
+            // Right column
+            for (int i = srow + 1; i <= erow; i++) {
+                ans.push_back(mat[i][ecol]);
+            }
+
+            // Bottom row
+            if (srow < erow) {
+                for (int j = ecol - 1; j >= scol; j--) {
+                    ans.push_back(mat[erow][j]);
+                }
+            }
+
+           
+            if (scol < ecol) {
+                for (int i = erow - 1; i > srow; i--) {
+                    ans.push_back(mat[i][scol]);
+                }
+            }
+
+            srow++;
+            erow--;
+            scol++;
+            ecol--;
+        }
+
+        return ans;
+    }
+};
