@@ -1,0 +1,61 @@
+COINTAINER WOTH MOST WATER
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int lp=0,rp=height.size()-1;
+        int maxWater=0;
+        while(lp<rp){
+           int w=rp-lp;
+           int ht=min(height[lp],height[rp]);
+           int currWater=w*ht;
+           maxWater=max(maxWater,currWater);
+           height[lp]<height[rp]?lp++:rp--;
+        }
+        return maxWater;
+    }
+};
+
+MOVE ZEROS
+  class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int j = 0;
+
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] != 0) {
+                swap(nums[i], nums[j]);
+                j++;
+            }
+        }
+    }
+};
+
+SQUARE OF SORTED ARRAY
+  class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>result(n);
+        int i=0;
+        int j=n-1;
+        int k=n-1;
+        while(k>=0){
+            int a=nums[i]*nums[i];
+            int b=nums[j]*nums[j];
+            if(a>b){
+                result[k]=a;
+                i++;
+            }
+            else{
+                result[k]=b;
+                j--;
+            }
+            k--;
+
+        }
+        return result;
+
+
+    }
+};
